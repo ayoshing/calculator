@@ -18,9 +18,46 @@ const subtract = document.getElementById('subtract');
 const clear = document.getElementById('clear');
 const del = document.getElementById('delete');
 const plusMinus = document.getElementById('plus-minus');
+var calculation = [];
+
+//basic calculation functions
+function addResult() {
+  input.reduce((acc, cur) => acc + cur);
+}
+
+function subtractResult() {
+  input.reduce((acc, cur) => acc - cur);
+}
+
+function multiplyResult() {
+  input.reduce((acc, cur) => acc * cur);
+}
+
+function divideResult() {
+  input.reduce((acc, cur) => acc / cur);
+}
 
 function operate(input) {
+  calculation.push(input);
+}
 
+function calculate(operator) {
+  if (operator == 'add') {
+    addResult();
+  } else if (operator == 'subtract') {
+    subtractResult();
+  } else if (operator == 'multiply') {
+    multiplyResult();
+  } else if (operator == 'divide') {
+    divideResult();
+  } else if (operator == 'equal') {
+    result();
+  } else if (operator == 'clear') {
+    clearResult();
+  } else if (operator == 'del') {
+    delResult();
+  }
+}
 
 function calculate() {
   one.addEventListener('click', operate(1));
@@ -33,12 +70,12 @@ function calculate() {
   eight.addEventListener('click', operate(8));
   nine.addEventListener('click', operate(9));
   zero.addEventListener('click', operate(0));
-  add.addEventListener('click', calculate);
-  subtract.addEventListener('click', calculate);
-  multiply.addEventListener('click', calculate);
-  divide.addEventListener('click', calculate);
+  add.addEventListener('click', calculate('add'));
+  subtract.addEventListener('click', calculate('subtract'));
+  multiply.addEventListener('click', calculate('multiply'));
+  divide.addEventListener('click', calculate('divide'));
   plusMinus.addEventListener('click', calculate);
-  clear.addEventListener('click', calculate);
-  del.addEventListener('click', calculate);
-  equal.addEventListener('click', calculate);
+  clear.addEventListener('click', calculate('clear'));
+  del.addEventListener('click', calculate('del'));
+  equal.addEventListener('click', calculate('equal'));
 }
