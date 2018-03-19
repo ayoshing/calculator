@@ -18,64 +18,43 @@ const subtract = document.getElementById('subtract');
 const clear = document.getElementById('clear');
 const del = document.getElementById('delete');
 const plusMinus = document.getElementById('plus-minus');
-var calculation = [];
+var input1 = '';
+var input2 = '';
 
-//basic calculation functions
-function addResult() {
-  input.reduce((acc, cur) => acc + cur);
+function numInput(input) {
+  input1 += input;
+  console.log(input1);
 }
 
-function subtractResult() {
-  input.reduce((acc, cur) => acc - cur);
-}
-
-function multiplyResult() {
-  input.reduce((acc, cur) => acc * cur);
-}
-
-function divideResult() {
-  input.reduce((acc, cur) => acc / cur);
-}
-
-function operate(input) {
-  calculation.push(input);
-}
-
-function calculate(operator) {
+function opInput(operator) {
   if (operator == 'add') {
-    addResult();
-  } else if (operator == 'subtract') {
-    subtractResult();
-  } else if (operator == 'multiply') {
-    multiplyResult();
-  } else if (operator == 'divide') {
-    divideResult();
-  } else if (operator == 'equal') {
-    result();
-  } else if (operator == 'clear') {
-    clearResult();
-  } else if (operator == 'del') {
-    delResult();
+    Number(input1);
+    input2 = input1;
+    input1 = '';
+    console.log(input1);
+    console.log(input2);
   }
 }
 
 function calculate() {
-  one.addEventListener('click', operate(1));
-  two.addEventListener('click', operate(2));
-  three.addEventListener('click', operate(3));
-  four.addEventListener('click', operate(4));
-  five.addEventListener('click', operate(5));
-  six.addEventListener('click', operate(6));
-  seven.addEventListener('click', operate(7));
-  eight.addEventListener('click', operate(8));
-  nine.addEventListener('click', operate(9));
-  zero.addEventListener('click', operate(0));
-  add.addEventListener('click', calculate('add'));
-  subtract.addEventListener('click', calculate('subtract'));
-  multiply.addEventListener('click', calculate('multiply'));
-  divide.addEventListener('click', calculate('divide'));
-  plusMinus.addEventListener('click', calculate);
-  clear.addEventListener('click', calculate('clear'));
-  del.addEventListener('click', calculate('del'));
-  equal.addEventListener('click', calculate('equal'));
+  one.addEventListener('click', () => numInput('1'));
+  two.addEventListener('click', () => numInput('2'));
+  three.addEventListener('click', () => numInput('3'));
+  four.addEventListener('click', () => numInput('4'));
+  five.addEventListener('click', () => numInput('5'));
+  six.addEventListener('click', () => numInput('6'));
+  seven.addEventListener('click', () => numInput('7'));
+  eight.addEventListener('click', () => numInput('8'));
+  nine.addEventListener('click', () => numInput('9'));
+  zero.addEventListener('click', () => numInput('0'));
+  add.addEventListener('click', () => opInput('add'));
+  subtract.addEventListener('click', () => opInput('subtract'));
+  multiply.addEventListener('click', () => opInput('multiply'));
+  divide.addEventListener('click', () => opInput('divide'));
+  plusMinus.addEventListener('click', () => calculate);
+  clear.addEventListener('click', () => opInput('clear'));
+  del.addEventListener('click', () => opInput('del'));
+  equal.addEventListener('click', () => opInput('equal'));
 }
+
+calculate();

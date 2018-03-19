@@ -46,6 +46,10 @@ h1 {
   text-align: center;
 }
 
+.numpad:hover {
+  cursor: pointer;
+}
+
 #zero {
   grid-column: 1 / 3;
   grid-row: 5;
