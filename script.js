@@ -18,43 +18,65 @@ const subtract = document.getElementById('subtract');
 const clear = document.getElementById('clear');
 const del = document.getElementById('delete');
 const plusMinus = document.getElementById('plus-minus');
-var input1 = '';
-var input2 = '';
+var numHolder = '';
+var calcHolder = [];
 
-function numInput(input) {
-  input1 += input;
-  console.log(input1);
+function userInput(num) {
+  numHolder += num;
+  console.log(numHolder);
 }
 
-function opInput(operator) {
-  if (operator == 'add') {
-    Number(input1);
-    input2 = input1;
-    input1 = '';
-    console.log(input1);
-    console.log(input2);
-  }
+function calculate(operator) {
+  numHolder = Number(numHolder);
+  calcHolder.push(numHolder);
+  division();
 }
 
-function calculate() {
-  one.addEventListener('click', () => numInput('1'));
-  two.addEventListener('click', () => numInput('2'));
-  three.addEventListener('click', () => numInput('3'));
-  four.addEventListener('click', () => numInput('4'));
-  five.addEventListener('click', () => numInput('5'));
-  six.addEventListener('click', () => numInput('6'));
-  seven.addEventListener('click', () => numInput('7'));
-  eight.addEventListener('click', () => numInput('8'));
-  nine.addEventListener('click', () => numInput('9'));
-  zero.addEventListener('click', () => numInput('0'));
-  add.addEventListener('click', () => opInput('add'));
-  subtract.addEventListener('click', () => opInput('subtract'));
-  multiply.addEventListener('click', () => opInput('multiply'));
-  divide.addEventListener('click', () => opInput('divide'));
-  plusMinus.addEventListener('click', () => calculate);
-  clear.addEventListener('click', () => opInput('clear'));
-  del.addEventListener('click', () => opInput('del'));
-  equal.addEventListener('click', () => opInput('equal'));
+function addition() {
+  var result = calcHolder.reduce((acc, cur) => acc + cur);
+  numHolder = '';
+  console.log(result);
 }
 
-calculate();
+function subtraction() {
+  var result = calcHolder.reduce((acc, cur) => acc - cur);
+  numHolder = '';
+  console.log(result);
+}
+
+function multiplication() {
+  var result = calcHolder.reduce((acc, cur) => acc * cur);
+  numHolder = '';
+  console.log(result);
+}
+
+function division() {
+  var result = calcHolder.reduce((acc, cur) => acc / cur);
+  numHolder = '';
+  console.log(result);
+}
+
+function main() {
+  one.addEventListener('click', () => userInput('1'));
+  two.addEventListener('click', () => userInput('2'));
+  three.addEventListener('click', () => userInput('3'));
+  four.addEventListener('click', () => userInput('4'));
+  five.addEventListener('click', () => userInput('5'));
+  six.addEventListener('click', () => userInput('6'));
+  seven.addEventListener('click', () => userInput('7'));
+  eight.addEventListener('click', () => userInput('8'));
+  nine.addEventListener('click', () => userInput('9'));
+  zero.addEventListener('click', () => userInput('0'));
+
+  clear.addEventListener('click', () => userInput('clear'));
+  del.addEventListener('click', () => userInput('del'));
+  plusMinus.addEventListener('click', () => userInput('negate'));
+
+  equal.addEventListener('click', () => calculate('equal'));
+  add.addEventListener('click', () => calculate('add'));
+  subtract.addEventListener('click', () => calculate('subtract'));
+  multiply.addEventListener('click', () => calculate('multiply'));
+  divide.addEventListener('click', () => calculate('divide'));
+}
+
+main();
