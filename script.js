@@ -1,4 +1,5 @@
-const display = document.querySelector('.top');
+const displayValue = document.querySelector('.display-value');
+const displayEq = document.querySelector('.display-equation');
 const one = document.getElementById('one');
 const two = document.getElementById('two');
 const three = document.getElementById('three');
@@ -34,36 +35,40 @@ function userInput(num) {
     dotInput();
   } else {
     numHolder += num;
-    console.log(numHolder);
+    displayValue.textContent = numHolder;
   }
 }
+
+function displayNumHolder {
+  
 
 function clearInput() {
   numHolder = '';
   calcHolder = [];
   operatorHolder = '';
   result = 0;
+  displayValue.textContent = '|';
 }
 
 function backspace() {
   var numHolderArray = numHolder.split('');
   numHolderArray.pop();
   numHolder = numHolderArray.join('');
-  console.log(numHolder);
+  displayValue.textContent = numHolder;
 }
 
 function negate() {
   var numHolderArray = numHolder.split('');
   numHolderArray.unshift('-');
   numHolder = numHolderArray.join('');
-  console.log(numHolder);
+  displayValue.textContent = numHolder;
 }
 
 function dotInput() {
   var numHolderArray = numHolder.split('');
   numHolderArray.push('.');
   numHolder = numHolderArray.join('');
-  console.log(numHolder);
+  displayValue.textContent = numHolder;
 }
 
 function calculate(operator) {
@@ -86,7 +91,7 @@ function calculate(operator) {
 function addition() {
   result = calcHolder.reduce((acc, cur) => acc + cur);
   numHolder = '';
-  console.log(result);
+  displayValue.textContent = result;
   calcHolder = [];
   calcHolder.push(result);
   operatorHolder = 'add';
@@ -95,7 +100,7 @@ function addition() {
 function subtraction() {
   result = calcHolder.reduce((acc, cur) => acc - cur);
   numHolder = '';
-  console.log(result);
+  displayValue.textContent = result;
   calcHolder = [];
   calcHolder.push(result);
   operatorHolder = 'subtract';
@@ -104,7 +109,7 @@ function subtraction() {
 function multiplication() {
   result = calcHolder.reduce((acc, cur) => acc * cur);
   numHolder = '';
-  console.log(result);
+  displayValue.textContent = result;
   calcHolder = [];
   calcHolder.push(result);
   operatorHolder = 'multiply';
@@ -113,7 +118,7 @@ function multiplication() {
 function division() {
   result = calcHolder.reduce((acc, cur) => acc / cur);
   numHolder = '';
-  console.log(result);
+  displayValue.textContent = result;
   calcHolder = [];
   calcHolder.push(result);
   operatorHolder = 'divide';
