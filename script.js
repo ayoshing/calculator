@@ -24,7 +24,45 @@ var result;
 var operatorHolder = '';
 
 function userInput(num) {
-  numHolder += num;
+  if (num == 'clear') {
+    clearInput();
+  } else if (num == 'del') {
+    backspace();
+  } else if (num == 'negate') {
+    negate();
+  } else if (num == 'dot') {
+    dotInput();
+  } else {
+    numHolder += num;
+    console.log(numHolder);
+  }
+}
+
+function clearInput() {
+  numHolder = '';
+  calcHolder = [];
+  operatorHolder = '';
+  result = 0;
+}
+
+function backspace() {
+  var numHolderArray = numHolder.split('');
+  numHolderArray.pop();
+  numHolder = numHolderArray.join('');
+  console.log(numHolder);
+}
+
+function negate() {
+  var numHolderArray = numHolder.split('');
+  numHolderArray.unshift('-');
+  numHolder = numHolderArray.join('');
+  console.log(numHolder);
+}
+
+function dotInput() {
+  var numHolderArray = numHolder.split('');
+  numHolderArray.push('.');
+  numHolder = numHolderArray.join('');
   console.log(numHolder);
 }
 
@@ -101,11 +139,10 @@ function main() {
   eight.addEventListener('click', () => userInput('8'));
   nine.addEventListener('click', () => userInput('9'));
   zero.addEventListener('click', () => userInput('0'));
-
+  plusMinus.addEventListener('click', () => userInput('negate'));
   clear.addEventListener('click', () => userInput('clear'));
   del.addEventListener('click', () => userInput('del'));
-  plusMinus.addEventListener('click', () => userInput('negate'));
-
+  dot.addEventListener('click', () => userInput('dot'));
   equal.addEventListener('click', () => calculate('equal'));
   add.addEventListener('click', () => calculate('add'));
   subtract.addEventListener('click', () => calculate('subtract'));
