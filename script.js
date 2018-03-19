@@ -20,6 +20,8 @@ const del = document.getElementById('delete');
 const plusMinus = document.getElementById('plus-minus');
 var numHolder = '';
 var calcHolder = [];
+var result;
+var operatorHolder = '';
 
 function userInput(num) {
   numHolder += num;
@@ -29,31 +31,63 @@ function userInput(num) {
 function calculate(operator) {
   numHolder = Number(numHolder);
   calcHolder.push(numHolder);
-  division();
+
+  if (operator == 'add') {
+    addition();
+  } else if (operator == 'subtract') {
+    subtraction();
+  } else if (operator == 'multiply') {
+    multiplication();
+  } else if (operator == 'divide') {
+    division();
+  } else {
+    calcEqual();
+  }
 }
 
 function addition() {
-  var result = calcHolder.reduce((acc, cur) => acc + cur);
+  result = calcHolder.reduce((acc, cur) => acc + cur);
   numHolder = '';
   console.log(result);
+  calcHolder = [];
+  calcHolder.push(result);
+  operatorHolder = 'add';
 }
 
 function subtraction() {
-  var result = calcHolder.reduce((acc, cur) => acc - cur);
+  result = calcHolder.reduce((acc, cur) => acc - cur);
   numHolder = '';
   console.log(result);
+  calcHolder = [];
+  calcHolder.push(result);
+  operatorHolder = 'subtract';
 }
 
 function multiplication() {
-  var result = calcHolder.reduce((acc, cur) => acc * cur);
+  result = calcHolder.reduce((acc, cur) => acc * cur);
   numHolder = '';
   console.log(result);
+  calcHolder = [];
+  calcHolder.push(result);
+  operatorHolder = 'multiply';
 }
 
 function division() {
-  var result = calcHolder.reduce((acc, cur) => acc / cur);
+  result = calcHolder.reduce((acc, cur) => acc / cur);
   numHolder = '';
   console.log(result);
+  calcHolder = [];
+  calcHolder.push(result);
+  operatorHolder = 'divide';
+}
+
+function calcEqual() {
+  calcHolder.pop();
+  calculate(operatorHolder);
+  operatorHolder = '';
+  numHolder = '';
+  calcHolder = [];
+  result = 0;
 }
 
 function main() {
