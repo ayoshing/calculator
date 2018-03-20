@@ -24,6 +24,13 @@ var calcHolder = [];
 var result;
 var operatorHolder = '';
 
+function commaConverter(input) {
+  var arr = input.split('');
+  for (i = 0; i < (input.length/3); i++) {
+    arr.splice()
+  }
+}
+
 function userInput(num) {
   if (num == 'clear') {
     clearInput();
@@ -38,9 +45,6 @@ function userInput(num) {
     displayValue.textContent = numHolder;
   }
 }
-
-function displayNumHolder {
-  
 
 function clearInput() {
   numHolder = '';
@@ -91,8 +95,8 @@ function calculate(operator) {
 function addition() {
   result = calcHolder.reduce((acc, cur) => acc + cur);
   numHolder = '';
-  displayValue.textContent = result;
   calcHolder = [];
+  displayValue.textContent = result;
   calcHolder.push(result);
   operatorHolder = 'add';
 }
