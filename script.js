@@ -1,5 +1,4 @@
 const displayValue = document.querySelector('.display-value');
-const displayEq = document.querySelector('.display-equation');
 const one = document.getElementById('one');
 const two = document.getElementById('two');
 const three = document.getElementById('three');
@@ -19,120 +18,140 @@ const subtract = document.getElementById('subtract');
 const clear = document.getElementById('clear');
 const del = document.getElementById('delete');
 const plusMinus = document.getElementById('plus-minus');
-var numHolder = '';
-var calcHolder = [];
 var result;
-var operatorHolder = '';
+var numberInput = 0;
+var operatorSelection = '';
+var equation = '';
+var calcArr = [];
 
-function commaConverter(input) {
-  var number = Number(input);
+function commaConverter(i) {
+  var number = Number(i);
   return number.toLocaleString(undefined, { maximumFractionDigits: 20 }).toString();
 }
 
-function userInput(num) {
-  if (num == 'clear') {
-    clearInput();
-  } else if (num == 'del') {
-    backspace();
-  } else if (num == 'negate') {
-    negate();
-  } else if (num == 'dot') {
-    dotInput();
-  } else {
-    numHolder += num;
-    displayValue.textContent = commaConverter(numHolder);
+function convertToOperator(i) {
+  switch (i) {
+    case 'add':
+      return '+';
+      break;
+    case 'subtract':
+      return '-';
+      break;
+    case 'multiply':
+      return '×';
+      break;
+    case 'divide':
+      return '÷';
+      break;
+    default:
   }
 }
 
-function clearInput() {
-  numHolder = '';
-  calcHolder = [];
-  operatorHolder = '';
+function userInput(i) {
+  if (i == 'clear') {
+    clearInput();
+  } else if (i == 'del') {
+    backspace();
+  } else if (i == 'negate') {
+    negate();
+  } else if (i == 'dot') {
+    dotInput();
+  } else {
+    numberInput += i;
+    displayValue.textContent = `${equation}${commaConverter(numberInput)}`;
+  }
+}
+
+function erase() {
   result = 0;
-  displayValue.textContent = '|';
+  numberInput = '';
+  operatorSelection = '';
+  equation = '';
+  calcArr = [];
+}
+
+function clearInput() {
+  erase();
+  displayValue.textContent = '0';
 }
 
 function backspace() {
-  var numHolderArray = numHolder.split('');
-  numHolderArray.pop();
-  numHolder = numHolderArray.join('');
-  displayValue.textContent = commaConverter(numHolder);
+  var arr = numberInput.split('');
+  arr.pop();
+  numberInput = arr.join('');
+  displayValue.textContent = commaConverter(numberInput);
 }
 
 function negate() {
-  var numHolderArray = numHolder.split('');
-  numHolderArray.unshift('-');
-  numHolder = numHolderArray.join('');
-  displayValue.textContent = commaConverter(numHolder);
+  var arr = numberInput.split('');
+  arr.unshift('-');
+  numberInput = arr.join('');
+  if (isNaN(numberInput)) {
+    displayValue.textContent = '0';
+    numberInput = 0;
+  } else {
+    displayValue.textContent = commaConverter(numberInput);
+  }
 }
 
 function dotInput() {
-  var numHolderArray = numHolder.split('');
-  numHolderArray.push('.');
-  numHolder = numHolderArray.join('');
-  displayValue.textContent = commaConverter(numHolder);
+  var arr = numberInput.split('');
+  arr.push('.');
+  numberInput = arr.join('');
+  displayValue.textContent = commaConverter(numberInput);
 }
 
 function calculate(operator) {
-  numHolder = Number(numHolder);
-  calcHolder.push(numHolder);
+  numberInput = Number(numberInput);
+  calcArr.push(numberInput);
 
   if (operator == 'add') {
-    addition();
+    addition('add');
   } else if (operator == 'subtract') {
-    subtraction();
+    subtraction('subtract');
   } else if (operator == 'multiply') {
-    multiplication();
+    multiplication('multiply');
   } else if (operator == 'divide') {
-    division();
+    division('multiply');
   } else {
     calcEqual();
   }
 }
 
-function addition() {
-  result = calcHolder.reduce((acc, cur) => acc + cur);
-  numHolder = '';
-  calcHolder = [];
-  displayValue.textContent = commaConverter(result);
-  calcHolder.push(result);
-  operatorHolder = 'add';
+function calculation(i) {
+  operatorSelection = i;
+  equation += `${commaConverter(numberInput)}${convertToOperator(operatorSelection)}`;
+  displayValue.textContent = `${equation}`;
+  numberInput = '';
+  calcArr = [];
+  calcArr.push(result);
 }
 
-function subtraction() {
-  result = calcHolder.reduce((acc, cur) => acc - cur);
-  numHolder = '';
-  calcHolder = [];
-  displayValue.textContent = commaConverter(result);
-  calcHolder.push(result);
-  operatorHolder = 'subtract';
+function addition(i) {
+  result = calcArr.reduce((acc, cur) => acc + cur);
+  calculation(i);
 }
 
-function multiplication() {
-  result = calcHolder.reduce((acc, cur) => acc * cur);
-  numHolder = '';
-  calcHolder = [];
-  displayValue.textContent = commaConverter(result);
-  calcHolder.push(result);
-  operatorHolder = 'multiply';
+function subtraction(i) {
+  result = calcArr.reduce((acc, cur) => acc - cur);
+  calculation(i);
 }
 
-function division() {
-  result = calcHolder.reduce((acc, cur) => acc / cur);
-  numHolder = '';
-  calcHolder = [];
-  displayValue.textContent = commaConverter(result);
-  calcHolder.push(result);
-  operatorHolder = 'divide';
+function multiplication(i) {
+  result = calcArr.reduce((acc, cur) => acc * cur);
+  calculation(i);
+}
+
+function division(i) {
+  result = calcArr.reduce((acc, cur) => acc / cur);
+  calculation(i);
 }
 
 function calcEqual() {
-  calcHolder.pop();
-  calculate(operatorHolder);
-  operatorHolder = '';
-  numHolder = '';
-  calcHolder = [];
-  result = 0;
+  calcArr.pop();
+  calculate(operatorSelection);
+  displayValue.textContent = commaConverter(result);
+  erase();
 }
 
 function main() {
@@ -150,6 +169,7 @@ function main() {
   clear.addEventListener('click', () => userInput('clear'));
   del.addEventListener('click', () => userInput('del'));
   dot.addEventListener('click', () => userInput('dot'));
+
   equal.addEventListener('click', () => calculate('equal'));
   add.addEventListener('click', () => calculate('add'));
   subtract.addEventListener('click', () => calculate('subtract'));

@@ -24,20 +24,15 @@ h1 {
 
 .top {
   display: grid;
-  grid-row: 1fr 3fr;
+  grid-row: 1fr;
   text-align: right;
   border-bottom: solid 1px #dbdbdb;
+  padding-top: 20px;
 }
 
 .display-value {
   font-size: 40px;
   padding: 0 20px;
-}
-
-.display-equation {
-  font-size: 20px;
-  color: #8e8e8e;
-  padding-right: 20px;
 }
 
 .bottom {
@@ -46,8 +41,13 @@ h1 {
   text-align: center;
 }
 
+.numpad {
+  padding-top: 10px;
+}
+
 .numpad:hover {
   cursor: pointer;
+  background: #dbdbdb;
 }
 
 #zero {
