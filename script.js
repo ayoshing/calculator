@@ -25,10 +25,8 @@ var result;
 var operatorHolder = '';
 
 function commaConverter(input) {
-  var arr = input.split('');
-  for (i = 0; i < (input.length/3); i++) {
-    arr.splice()
-  }
+  var number = Number(input);
+  return number.toLocaleString(undefined, { maximumFractionDigits: 20 }).toString();
 }
 
 function userInput(num) {
@@ -42,7 +40,7 @@ function userInput(num) {
     dotInput();
   } else {
     numHolder += num;
-    displayValue.textContent = numHolder;
+    displayValue.textContent = commaConverter(numHolder);
   }
 }
 
@@ -58,21 +56,21 @@ function backspace() {
   var numHolderArray = numHolder.split('');
   numHolderArray.pop();
   numHolder = numHolderArray.join('');
-  displayValue.textContent = numHolder;
+  displayValue.textContent = commaConverter(numHolder);
 }
 
 function negate() {
   var numHolderArray = numHolder.split('');
   numHolderArray.unshift('-');
   numHolder = numHolderArray.join('');
-  displayValue.textContent = numHolder;
+  displayValue.textContent = commaConverter(numHolder);
 }
 
 function dotInput() {
   var numHolderArray = numHolder.split('');
   numHolderArray.push('.');
   numHolder = numHolderArray.join('');
-  displayValue.textContent = numHolder;
+  displayValue.textContent = commaConverter(numHolder);
 }
 
 function calculate(operator) {
@@ -96,7 +94,7 @@ function addition() {
   result = calcHolder.reduce((acc, cur) => acc + cur);
   numHolder = '';
   calcHolder = [];
-  displayValue.textContent = result;
+  displayValue.textContent = commaConverter(result);
   calcHolder.push(result);
   operatorHolder = 'add';
 }
@@ -104,8 +102,8 @@ function addition() {
 function subtraction() {
   result = calcHolder.reduce((acc, cur) => acc - cur);
   numHolder = '';
-  displayValue.textContent = result;
   calcHolder = [];
+  displayValue.textContent = commaConverter(result);
   calcHolder.push(result);
   operatorHolder = 'subtract';
 }
@@ -113,8 +111,8 @@ function subtraction() {
 function multiplication() {
   result = calcHolder.reduce((acc, cur) => acc * cur);
   numHolder = '';
-  displayValue.textContent = result;
   calcHolder = [];
+  displayValue.textContent = commaConverter(result);
   calcHolder.push(result);
   operatorHolder = 'multiply';
 }
@@ -122,8 +120,8 @@ function multiplication() {
 function division() {
   result = calcHolder.reduce((acc, cur) => acc / cur);
   numHolder = '';
-  displayValue.textContent = result;
   calcHolder = [];
+  displayValue.textContent = commaConverter(result);
   calcHolder.push(result);
   operatorHolder = 'divide';
 }
