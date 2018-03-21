@@ -53,9 +53,9 @@ function userInput(i) {
   } else if (i == 'del') {
     backspace();
   } else if (i == 'negate') {
-    negate();
+    negate('-');
   } else if (i == 'dot') {
-    dotInput();
+    dotInput('.');
   } else {
     numberInput += i;
     displayValue.textContent = `${equation}${commaConverter(numberInput)}`;
@@ -64,7 +64,7 @@ function userInput(i) {
 
 function erase() {
   result = 0;
-  numberInput = '';
+  numberInput = 0;
   operatorSelection = '';
   equation = '';
   calcArr = [];
@@ -82,23 +82,14 @@ function backspace() {
   displayValue.textContent = commaConverter(numberInput);
 }
 
-function negate() {
-  var arr = numberInput.split('');
-  arr.unshift('-');
-  numberInput = arr.join('');
-  if (isNaN(numberInput)) {
-    displayValue.textContent = '0';
-    numberInput = 0;
-  } else {
-    displayValue.textContent = commaConverter(numberInput);
-  }
+function negate(i) {
+  numberInput = '-';
+  displayValue.textContent = `${equation}-`;
 }
 
-function dotInput() {
-  var arr = numberInput.split('');
-  arr.push('.');
-  numberInput = arr.join('');
-  displayValue.textContent = commaConverter(numberInput);
+function dotInput(i) {
+  numberInput += i;
+  displayValue.textContent = `${equation.toString()}${commaConverter(numberInput)}.`;
 }
 
 function calculate(operator) {
@@ -121,7 +112,7 @@ function calculate(operator) {
 function calculation(i) {
   operatorSelection = i;
   equation += `${commaConverter(numberInput)}${convertToOperator(operatorSelection)}`;
-  displayValue.textContent = `${equation}`;
+  displayValue.textContent = equation;
   numberInput = '';
   calcArr = [];
   calcArr.push(result);
