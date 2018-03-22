@@ -62,6 +62,10 @@ function userInput(i) {
   }
 }
 
+function click() {
+  document.querySelector('.btn').classList.remove('btn');
+}
+
 function erase() {
   result = 0;
   numberInput = 0;
@@ -79,7 +83,7 @@ function backspace() {
   var arr = numberInput.split('');
   arr.pop();
   numberInput = arr.join('');
-  displayValue.textContent = commaConverter(numberInput);
+  displayValue.textContent = `${equation.toString()}${commaConverter(numberInput)}.`;
 }
 
 function negate(i) {

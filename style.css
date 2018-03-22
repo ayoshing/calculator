@@ -45,9 +45,14 @@ h1 {
   padding-top: 10px;
 }
 
-.numpad:hover {
+.btn:hover {
   cursor: pointer;
   background: #dbdbdb;
+}
+
+.click {
+  background: #44fbff;
+  box-shadow: 0 0 10px #30bec1;
 }
 
 #zero {
