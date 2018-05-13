@@ -10,13 +10,23 @@ function handleBtnClicked(e) {
   if (this.dataset.key === 'equal') {
     equation = btnStored.join('');
     console.log(eval(equation));
+    displayValue.innerHTML = answer;
   } else if (this.dataset.key === 'delete') {
     btnStored.pop();
+    equation = btnStored.join('');
     console.log(btnStored);
+    displayValue.innerHTML = equation;
   } else if (this.dataset.key === 'clear') {
     btnStored = [];
     displayValue.innerHTML = 0;
     displayResult.innerHTML = 0;
+  } else if (this.classList[1] === 'operator') {
+    btnStored.push(this.dataset.key);
+    equation = btnStored.join('');
+    console.log(btnStored);
+    console.log(answer);
+    displayResult.innerHTML = answer;
+    displayValue.innerHTML = equation;
   } else {
     btnStored.push(this.dataset.key);
     equation = btnStored.join('');
@@ -24,5 +34,6 @@ function handleBtnClicked(e) {
     console.log(btnStored);
     console.log(answer);
     displayResult.innerHTML = answer;
+    displayValue.innerHTML = equation;
   }
 }
