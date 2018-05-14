@@ -1,7 +1,7 @@
 const displayEquation = document.querySelector('.display-equation');
 const displayAnswer = document.querySelector('.display-answer');
 const buttons = document.querySelectorAll('.btn');
-const btn = buttons.forEach(btn => btn.addEventListener('click', handleBtnClicked));
+const btnCLicked = buttons.forEach(btn => btn.addEventListener('click', handleBtnClicked));
 
 let btnClicked = [];
 
