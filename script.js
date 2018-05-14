@@ -1,39 +1,35 @@
-const displayValue = document.querySelector('.display-value');
-const displayResult = document.querySelector('.display-result');
+const displayEquation = document.querySelector('.display-equation');
+const displayAnswer = document.querySelector('.display-answer');
 const buttons = document.querySelectorAll('.btn');
 const btn = buttons.forEach(btn => btn.addEventListener('click', handleBtnClicked));
 
-let btnStored = [];
+let btnClicked = [];
 
 function handleBtnClicked(e) {
   let equation;
   if (this.dataset.key === 'equal') {
-    equation = btnStored.join('');
-    console.log(eval(equation));
-    displayValue.innerHTML = answer;
+    equation = btnClicked.join('');
+    displayEquation.innerHTML = answer;
   } else if (this.dataset.key === 'delete') {
-    btnStored.pop();
-    equation = btnStored.join('');
-    console.log(btnStored);
-    displayValue.innerHTML = equation;
-  } else if (this.dataset.key === 'clear') {
-    btnStored = [];
-    displayValue.innerHTML = 0;
-    displayResult.innerHTML = 0;
-  } else if (this.classList[1] === 'operator') {
-    btnStored.push(this.dataset.key);
-    equation = btnStored.join('');
-    console.log(btnStored);
-    console.log(answer);
-    displayResult.innerHTML = answer;
-    displayValue.innerHTML = equation;
-  } else {
-    btnStored.push(this.dataset.key);
-    equation = btnStored.join('');
+    btnClicked.pop();
+    equation = btnClicked.join('');
     answer = eval(equation);
-    console.log(btnStored);
-    console.log(answer);
-    displayResult.innerHTML = answer;
-    displayValue.innerHTML = equation;
+    displayAnswer.innerHTML = answer;
+    displayEquation.innerHTML = equation;
+  } else if (this.dataset.key === 'clear') {
+    btnClicked = [];
+    displayAnswer.innerHTML = 0;
+    displayEquation.innerHTML = 0;
+  } else if (this.classList[1] === 'operator') {
+    btnClicked.push(this.dataset.key);
+    equation = btnClicked.join('');
+    displayAnswer.innerHTML = answer;
+    displayEquation.innerHTML = equation;
+  } else {
+    btnClicked.push(this.dataset.key);
+    equation = btnClicked.join('');
+    answer = eval(equation);
+    displayAnswer.innerHTML = answer;
+    displayEquation.innerHTML = equation;
   }
 }
