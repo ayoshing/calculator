@@ -9,6 +9,7 @@ function handleBtnClicked(e) {
   let equation;
   if (this.dataset.key === 'equal') {
     equation = btnClicked.join('');
+    btnClicked = [answer];
     displayEquation.innerHTML = answer;
   } else if (this.dataset.key === 'delete') {
     btnClicked.pop();
