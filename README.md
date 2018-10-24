@@ -1,5 +1,6 @@
 # Standard Calculator
 Created as part of the Odin Project Curriculum(free open-source web development education).
+https://ayoshing.github.io/calculator/
 
 ## Development Details
 ### UI
